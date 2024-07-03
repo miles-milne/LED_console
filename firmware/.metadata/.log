@@ -1,0 +1,19 @@
+!SESSION 2024-07-03 16:38:06.625 -----------------------------------------------
+eclipse.buildId=Version 1.15.1
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\seven_seg_display\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\seven_seg_display\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-07-03 16:38:24.327
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-07-03 16:38:24.340
+!MESSAGE Log4j2 initialized with config file C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-07-03 16:38:26.950
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-07-03 16:38:32.331
+!MESSAGE Indexed 'seven_seg_display' (24 sources, 148 headers) in 3.76 sec: 13,039 declarations; 46,479 references; 5 unresolved inclusions; 121 syntax errors; 1,062 unresolved names (1.8%)
