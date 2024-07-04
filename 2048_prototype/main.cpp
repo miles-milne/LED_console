@@ -3,6 +3,7 @@
 #include <ctime>
 #include <stack>
 #include <conio.h>
+#include <Windows.h>
 
 using std::cout, std::cin;
 
@@ -46,11 +47,11 @@ public:
     // updates the board in accordance to the user input
     bool move(char input) {
 
-        int* temp_line;
-        int* temp_grid = new int[_row*_col];
+        int *temp_line;
+        int *temp_grid = new int[_row * _col];
 
         // creates copy of _grid
-        for (int i = 0; i < _row*_col; ++i)
+        for (int i = 0; i < _row * _col; ++i)
             temp_grid[i] = _grid[i];
 
         if (input == 'w') { // UP
@@ -58,67 +59,67 @@ public:
 
             for (int c = 0; c < _col; ++c) {
                 for (int r = 0; r < _row; ++r)
-                    temp_line[r] = _grid[c + _col*r];
+                    temp_line[r] = _grid[c + _col * r];
 
                 _score += shift_line(temp_line, _row);
 
                 for (int r = 0; r < _row; ++r)
-                    _grid[c + _col*r] = temp_line[r];
+                    _grid[c + _col * r] = temp_line[r];
             }
 
-        }
-        else if (input == 'd') { // RIGHT
+        } else if (input == 'd') { // RIGHT
             temp_line = new int[_col];
 
             for (int r = 0; r < _row; ++r) {
 
-                for (int c = _col-1; c >= 0; --c)
-                    temp_line[_col-1 -c] = _grid[_col*r + c];
+                for (int c = _col - 1; c >= 0; --c)
+                    temp_line[_col - 1 - c] = _grid[_col * r + c];
 
                 _score += shift_line(temp_line, _col);
 
-                for (int c = _col-1; c >= 0; --c)
-                    _grid[_col*r + c] = temp_line[_col-1 -c];
+                for (int c = _col - 1; c >= 0; --c)
+                    _grid[_col * r + c] = temp_line[_col - 1 - c];
             }
 
-        }
-        else if (input == 's') { // DOWN
+        } else if (input == 's') { // DOWN
             temp_line = new int[_row];
 
             for (int c = 0; c < _col; ++c) {
-                for (int r = _row-1; r >= 0; --r)
-                    temp_line[_row-1 - r] = _grid[c + _col*r];
+                for (int r = _row - 1; r >= 0; --r)
+                    temp_line[_row - 1 - r] = _grid[c + _col * r];
 
                 _score += shift_line(temp_line, _row);
 
-                for (int r = _row-1; r >= 0; --r)
-                    _grid[c + _col*r] = temp_line[_row-1 - r];
+                for (int r = _row - 1; r >= 0; --r)
+                    _grid[c + _col * r] = temp_line[_row - 1 - r];
             }
 
-        }
-        else if (input == 'a') { // LEFT
+        } else if (input == 'a') { // LEFT
             temp_line = new int[_col];
 
             for (int r = 0; r < _row; ++r) {
 
                 for (int c = 0; c < _col; ++c)
-                    temp_line[c] = _grid[_col*r + c];
+                    temp_line[c] = _grid[_col * r + c];
 
                 _score += shift_line(temp_line, _col);
 
                 for (int c = 0; c < _col; ++c)
-                    _grid[_col*r + c] = temp_line[c];
+                    _grid[_col * r + c] = temp_line[c];
             }
 
-        }
-        else if (input == 'r') {
+        } else if (input == 'r') {
             delete[] temp_grid;
             clear_grid();
             _score = 0;
             return true;
         }
+        else if (input == 27) { // esc key was pressed
+            delete[] temp_grid;
+            std:: exit(1);
+            return false;
+        }
         else {
-            cout << "Invalid input! ";
             delete[] temp_grid;
             return false;
         }
@@ -197,27 +198,31 @@ public:
         return score;
     }
 
-    // FIXME this doesnt work
+
+    // Checks if there are any valid moves
     bool has_moves() {
+
+        if (vacancy())
+            return true;
 
         for (int r = 0; r < _row; ++r) {
             for (int c = 0; c < _col; ++c) {
 
                 // checks for equality to element on its right
-               if (c != _col-1 && _grid[_col*r + c] == _grid[_col*r + c + 1])
+               if (c < _col-1 && _grid[_col*r + c] == _grid[_col*r + c + 1])
                    return true;
 
                // checks for equality to element below
-               if (r != _row-1 && _grid[_col*r + c] == _grid[_col*r + c + _col])
+               if (r < _row-1 && _grid[_col*r + c] == _grid[_col*r + c + _col])
                    return true;
             }
         }
 
-        return vacancy();
+        return false;
     }
 
 
-    // Adds a random "2" or "4" to the grid if space is available
+    // Adds a random "2" or "4" to a random empty grid space
     void populate(unsigned int seed) {
 
         int* empty = new int[_row*_col];
@@ -246,7 +251,7 @@ public:
     }
 
 
-    // displays the grid on the console
+    // displays the empty grid to the console
     void print() {
 
         std:: ostringstream buffer;
@@ -270,9 +275,7 @@ public:
 
         }
 
-
-
-        std:: system("cls");
+        update();
         cout << buffer.str();
     }
 
@@ -326,86 +329,123 @@ public:
     }
 
 
-    void test_value_set() {
-
-        unsigned int r, c;
-        int val;
-
-
-        cout << "Please enter the row:";
-        cin >> r;
-
-        cout << "Please enter the col:";
-        cin >> c;
-
-
-
-        if (r >= _row || c >= _col) {
-            cout << "(" << r << ", " << c << ") is an invalid entry.\n";
-            return;
-        }
-
-        cout << "Now, enter a value:";
-        cin >> val;
-
-
-        _grid[_col*r + c] = val;
-
-    }
-
-
-    int* get_grid() const {
-        return _grid;
-    }
-
-
     // "Game loop" of the 2048 clone
     void play() {
         std:: string name;
         cout << "Please enter your name: ";
         cin >> name;
-        clear_grid();
-
-        bool valid_action = true;
 
 
         while(name != "quit") {
 
-            std:: system("cls");
+            bool lost = false;
+            _score = 0;
+            clear_grid();
+            cls();
 
-            while(has_moves()) {
+            while(!lost) {
 
                 if (vacancy())
                     populate((int) std::clock());
 
                 print();
-                cout << "\nEnter direction (W,A,S,D), or R to restart: ";
-                while(!move(input())) {}
+                cout << "\nEnter direction (W,A,S,D), or R to restart";
+                while(!move(input())) {
+                    if (!has_moves()) {
+                        lost = true;
+                        break;
+                    }
+                } // only updates the game when the game state has changed
             }
 
 
             print();
-            cout << name << ", it's game over man!\n";
+            cout << "\n" << name << ", it's game over man!\n";
             // TODO: save highscore
 
             cout << "Please enter your name, or type \"quit\" to exit: ";
             cin >> name;
-            clear_grid();
         }
+    }
+
+
+    // https://stackoverflow.com/questions/34842526/update-console-without-flickering-c
+    static void cls()
+    {
+        // Get the Win32 handle representing standard output.
+        // This generally only has to be done once, so we make it static.
+        static const HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+        CONSOLE_SCREEN_BUFFER_INFO csbi;
+        COORD topLeft = { 0, 0 };
+
+        // std::cout uses a buffer to batch writes to the underlying console.
+        // We need to flush that to the console because we're circumventing
+        // std::cout entirely; after we clear the console, we don't want
+        // stale buffered text to randomly be written out.
+        std::cout.flush();
+
+        // Figure out the current width and height of the console window
+        if (!GetConsoleScreenBufferInfo(hOut, &csbi)) {
+            // TODO: Handle failure!
+            abort();
+        }
+        DWORD length = csbi.dwSize.X * csbi.dwSize.Y;
+
+        DWORD written;
+
+        // Flood-fill the console with spaces to clear it
+        FillConsoleOutputCharacter(hOut, TEXT(' '), length, topLeft, &written);
+
+        // Reset the attributes of every character to the default.
+        // This clears all background colour formatting, if any.
+        FillConsoleOutputAttribute(hOut, csbi.wAttributes, length, topLeft, &written);
+
+        // Move the cursor back to the top left for the next sequence of writes
+        SetConsoleCursorPosition(hOut, topLeft);
+    }
+
+
+    // https://www.sololearn.com/en/Discuss/1714796/how-to-update-console-without-flicker-in-c
+    void update(){
+        COORD cursorPosition;	cursorPosition.X = 0;	cursorPosition.Y = 0;	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPosition);
     }
 
 };
 
 
+//https://stackoverflow.com/questions/18028808/remove-blinking-underscore-on-console-cmd-prompt
+void ShowConsoleCursor(bool showFlag)
+{
+    HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    CONSOLE_CURSOR_INFO     cursorInfo;
+
+    GetConsoleCursorInfo(out, &cursorInfo);
+    cursorInfo.bVisible = showFlag; // set the cursor visibility
+    SetConsoleCursorInfo(out, &cursorInfo);
+}
+
+
 int main() {
 
-    //std:: system("Color 03");
+    int rows = 4, cols = 4;
 
-    Grid game = Grid(4,4);
+    cout << "Please enter the number of rows: ";
+    cin >> rows;
+    if (!cin) rows = 4;
+
+    cout << "Please enter the number of columns: ";
+    cin >> cols;
+    if (!cin) cols = 4;
+
+    ShowConsoleCursor(false);
+    Grid game = Grid(rows, cols);
     game.play();
 
     // TODO: allow for creating games of custom size
     // Todo: Add scoreboard.txt using fstream
+    // TODO: Pressing escape exits and saves! Grid is saved into txt file. When pressing r or losing, txt file is cleared.
 
 
     /* Test line stack
