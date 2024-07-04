@@ -1,1 +1,0 @@
-CMakeLists.txt not found in C:\Users\1miln\Desktop\Projects\hardware_2048\2048_cpp Select CMakeLists.txt
