@@ -108,10 +108,23 @@ public:
                     _grid[_col * r + c] = temp_line[c];
             }
 
-        } else if (input == 'r') {
+        }
+        else if (input == 'r') {
             delete[] temp_grid;
             clear_grid();
             _score = 0;
+            return true;
+        }
+        else if (input == 8) { // backspace causes automatic loss
+
+            for (int k = 0; k < _row*_col; k++) {
+                _grid[k] = (intptr_t)_grid + 1 + k;
+            }
+
+
+
+            cout << "\nOops, you broke it!";
+            delete[] temp_grid;
             return true;
         }
         else if (input == 27) { // esc key was pressed
@@ -330,18 +343,18 @@ public:
 
 
     // "Game loop" of the 2048 clone
-    void play() {
+    bool play() {
         std:: string name;
         cout << "Please enter your name: ";
         cin >> name;
+        clear_grid();
+        cls();
 
 
         while(name != "quit") {
 
             bool lost = false;
             _score = 0;
-            clear_grid();
-            cls();
 
             while(!lost) {
 
@@ -355,17 +368,25 @@ public:
                         lost = true;
                         break;
                     }
-                } // only updates the game when the game state has changed
+                }
             }
 
-
+            cls();
             print();
             cout << "\n" << name << ", it's game over man!\n";
             // TODO: save highscore
 
-            cout << "Please enter your name, or type \"quit\" to exit: ";
+            cout << "Please enter your name, or type \"quit\" to exit, or \"reset\" to reinit: ";
             cin >> name;
+
+            if (name == "reset")
+                return true;
+
+            clear_grid();
+            cls();
         }
+
+        return false;
     }
 
 
@@ -429,19 +450,29 @@ void ShowConsoleCursor(bool showFlag)
 
 int main() {
 
-    int rows = 4, cols = 4;
+    const int MAX_ROWS = 10, MAX_COL = 21;
+    bool reset = false;
 
-    cout << "Please enter the number of rows: ";
-    cin >> rows;
-    if (!cin) rows = 4;
+    do {
 
-    cout << "Please enter the number of columns: ";
-    cin >> cols;
-    if (!cin) cols = 4;
+        int rows = 4, cols = 4;
 
-    ShowConsoleCursor(false);
-    Grid game = Grid(rows, cols);
-    game.play();
+        cout << "Please enter the number of rows: ";
+        cin >> rows;
+        if (!cin || rows <= 1) rows = 4;
+
+        cout << "Please enter the number of columns: ";
+        cin >> cols;
+        if (!cin || cols <= 1) cols = 4;
+
+        cin.clear();
+
+        ShowConsoleCursor(false);
+        Grid game = Grid(rows, cols);
+        reset = game.play();
+        game.~Grid();
+    }
+    while(reset);
 
     // TODO: allow for creating games of custom size
     // Todo: Add scoreboard.txt using fstream
