@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "2048_footprints")(type "KiCad")(uri "C:/Users/1miln/Desktop/Projects/hardware_2048/kicad/libs/2048_footprints.pretty")(options "")(descr ""))
+)

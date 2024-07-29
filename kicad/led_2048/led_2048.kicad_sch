@@ -1,0 +1,165 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "c576df4b-92c0-44b0-b003-b697a5a04765")
+	(paper "A4")
+	(lib_symbols)
+	(sheet
+		(at 180.34 43.18)
+		(size 60.96 24.13)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "ae8526da-3c23-4338-b8c9-a49831dbded9")
+		(property "Sheetname" "Press buttons"
+			(at 180.34 42.4684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "buttons.kicad_sch"
+			(at 180.34 67.8946 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "led_2048"
+				(path "/c576df4b-92c0-44b0-b003-b697a5a04765"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 75.946 37.338)
+		(size 27.686 17.526)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b7eda4aa-318d-4020-9d5c-8e21103c3223")
+		(property "Sheetname" "Score display"
+			(at 75.946 36.6264 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "seven_seg_display.kicad_sch"
+			(at 75.946 55.4486 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "led_2048"
+				(path "/c576df4b-92c0-44b0-b003-b697a5a04765"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 178.943 80.01)
+		(size 78.74 32.766)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "c77ae034-cca4-473c-b646-c49363a57ea5")
+		(property "Sheetname" "LED Matrix"
+			(at 178.943 79.2984 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "display.kicad_sch"
+			(at 178.943 113.3606 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "led_2048"
+				(path "/c576df4b-92c0-44b0-b003-b697a5a04765"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 71.882 85.852)
+		(size 76.2 45.72)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "fbb28dfe-f4d8-4e18-86e7-4227759d21b0")
+		(property "Sheetname" "MCU"
+			(at 71.882 85.1404 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "mcu.kicad_sch"
+			(at 71.882 132.1566 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "led_2048"
+				(path "/c576df4b-92c0-44b0-b003-b697a5a04765"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)

@@ -1,0 +1,25 @@
+13:47:05 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:119:30: warning: passing argument 3 of 'shift_reg' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  119 |           shift_reg(0x7, 12, SHIFT_REG_PINS);
+      |                              ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/rbg_led.h:11:54: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'const uint16_t *' {aka 'const short unsigned int *'}
+   11 | void shift_reg(long shift_set, uint8_t len, uint16_t pins[3]);
+      |                                             ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "led_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\led_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_display.elf
+ 
+arm-none-eabi-size  led_display.elf 
+arm-none-eabi-objdump -h -S led_display.elf  > "led_display.list"
+   text	   data	    bss	    dec	    hex	filename
+  14256	    112	   1952	  16320	   3fc0	led_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_display.list
+ 
+
+13:47:06 Build Finished. 0 errors, 1 warnings. (took 553ms)
+

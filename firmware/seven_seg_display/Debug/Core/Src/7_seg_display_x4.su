@@ -1,4 +1,0 @@
-../Core/Src/7_seg_display_x4.c:146:6:shift_reg	32	static
-../Core/Src/7_seg_display_x4.c:169:6:display_word_single	32	static
-../Core/Src/7_seg_display_x4.c:187:6:display_word_multiple	40	static
-../Core/Src/7_seg_display_x4.c:273:6:multi_seven_seg_set	16	static

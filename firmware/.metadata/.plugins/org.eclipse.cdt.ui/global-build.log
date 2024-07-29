@@ -1,0 +1,479 @@
+16:30:15 **** Incremental Build of configuration Debug for project seven_seg_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/7_seg_display_x4.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/7_seg_display_x4.d" -MT"Core/Src/7_seg_display_x4.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/7_seg_display_x4.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:118:75: warning: passing argument 6 of 'display_num_multiple' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  118 |           display_num_multiple(seconds, 10, DATA_PIN, CLK_PIN, LATCH_PIN, SEGMENT_PINS);
+      |                                                                           ^~~~~~~~~~~~
+In file included from ../Core/Src/main.c:24:
+../Core/Inc/7_seg_display_x4.h:17:117: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'const uint16_t *' {aka 'const short unsigned int *'}
+   17 | void display_num_multiple(uint16_t num, int speed, uint16_t ser_pin, uint16_t clk_pin, uint16_t latch_pin, uint16_t seg_pins[4]);
+      |                                                                                                            ~~~~~~~~~^~~~~~~~~~~
+../Core/Src/7_seg_display_x4.c: In function 'display_word_single':
+../Core/Src/7_seg_display_x4.c:191:27: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  191 |         uint16_t length = strlen(word);
+      |                           ^~~~~~
+../Core/Src/7_seg_display_x4.c:9:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    8 | #include "7_seg_display_x4.h"
+  +++ |+#include <string.h>
+    9 | #include "stm32f4xx_hal.h"
+../Core/Src/7_seg_display_x4.c:191:27: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  191 |         uint16_t length = strlen(word);
+      |                           ^~~~~~
+../Core/Src/7_seg_display_x4.c:191:27: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/7_seg_display_x4.c:195:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  195 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[k]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c: In function 'display_word_multiple':
+../Core/Src/7_seg_display_x4.c:253:27: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  253 |         uint16_t length = strlen(word);
+      |                           ^~~~~~
+../Core/Src/7_seg_display_x4.c:253:27: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/7_seg_display_x4.c:257:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  257 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:262:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  262 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:266:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  266 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[1]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:272:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  272 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:276:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  276 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[1]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:280:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  280 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[2]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:288:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  288 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:292:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  292 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[1]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:296:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  296 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[2]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:300:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  300 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[3]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:310:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  310 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~
+../Core/Src/7_seg_display_x4.c:314:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  314 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset+1]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~~~
+../Core/Src/7_seg_display_x4.c:318:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  318 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset+2]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~~~
+../Core/Src/7_seg_display_x4.c:322:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  322 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset+3]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~~~
+arm-none-eabi-gcc -o "seven_seg_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\seven_seg_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="seven_seg_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: seven_seg_display.elf
+ 
+arm-none-eabi-size  seven_seg_display.elf 
+arm-none-eabi-objdump -h -S seven_seg_display.elf  > "seven_seg_display.list"
+   text	   data	    bss	    dec	    hex	filename
+   8604	     12	   1644	  10260	   2814	seven_seg_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: seven_seg_display.list
+ 
+16:35:55 **** Incremental Build of configuration Debug for project seven_seg_display ****
+make -j16 all 
+arm-none-eabi-size  seven_seg_display.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8604	     12	   1644	  10260	   2814	seven_seg_display.elf
+Finished building: default.size.stdout
+ 
+16:38:43 **** Incremental Build of configuration Debug for project seven_seg_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:122:75: warning: passing argument 6 of 'display_num_multiple' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  122 |           display_num_multiple(seconds, 10, DATA_PIN, CLK_PIN, LATCH_PIN, SEGMENT_PINS);
+      |                                                                           ^~~~~~~~~~~~
+In file included from ../Core/Src/main.c:24:
+../Core/Inc/7_seg_display_x4.h:17:117: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'const uint16_t *' {aka 'const short unsigned int *'}
+   17 | void display_num_multiple(uint16_t num, int speed, uint16_t ser_pin, uint16_t clk_pin, uint16_t latch_pin, uint16_t seg_pins[4]);
+      |                                                                                                            ~~~~~~~~~^~~~~~~~~~~
+arm-none-eabi-gcc -o "seven_seg_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\seven_seg_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="seven_seg_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: seven_seg_display.elf
+ 
+arm-none-eabi-size  seven_seg_display.elf 
+arm-none-eabi-objdump -h -S seven_seg_display.elf  > "seven_seg_display.list"
+   text	   data	    bss	    dec	    hex	filename
+   8672	     12	   1644	  10328	   2858	seven_seg_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: seven_seg_display.list
+ 
+13:24:24 **** Clean-only build of configuration Debug for project led_display ****
+make -j16 clean 
+rm -rf ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.su ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.cyclo ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.d ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.su
+rm -rf ./Core/Startup/startup_stm32f401retx.d ./Core/Startup/startup_stm32f401retx.o
+rm -rf ./Core/Src/7_seg_display_x4.cyclo ./Core/Src/7_seg_display_x4.d ./Core/Src/7_seg_display_x4.o ./Core/Src/7_seg_display_x4.su ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/stm32f4xx_hal_msp.cyclo ./Core/Src/stm32f4xx_hal_msp.d ./Core/Src/stm32f4xx_hal_msp.o ./Core/Src/stm32f4xx_hal_msp.su ./Core/Src/stm32f4xx_it.cyclo ./Core/Src/stm32f4xx_it.d ./Core/Src/stm32f4xx_it.o ./Core/Src/stm32f4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.cyclo ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f4xx.cyclo ./Core/Src/system_stm32f4xx.d ./Core/Src/system_stm32f4xx.o ./Core/Src/system_stm32f4xx.su
+rm -rf default.size.stdout seven_seg_display.elf seven_seg_display.list seven_seg_display.map
+ 
+13:24:24 **** Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Startup/startup_stm32f401retx.d" -MT"Core/Startup/startup_stm32f401retx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Startup/startup_stm32f401retx.o" "../Core/Startup/startup_stm32f401retx.s"
+arm-none-eabi-gcc "../Core/Src/7_seg_display_x4.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/7_seg_display_x4.d" -MT"Core/Src/7_seg_display_x4.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/7_seg_display_x4.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/rbg_led.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/rbg_led.d" -MT"Core/Src/rbg_led.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/rbg_led.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_hal_msp.d" -MT"Core/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f4xx_it.d" -MT"Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f4xx.d" -MT"Core/Src/system_stm32f4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f4xx.o"
+../Core/Src/7_seg_display_x4.c: In function 'display_word_single':
+../Core/Src/7_seg_display_x4.c:191:27: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  191 |         uint16_t length = strlen(word);
+      |                           ^~~~~~
+../Core/Src/7_seg_display_x4.c:9:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    8 | #include "7_seg_display_x4.h"
+  +++ |+#include <string.h>
+    9 | #include "stm32f4xx_hal.h"
+../Core/Src/7_seg_display_x4.c:191:27: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  191 |         uint16_t length = strlen(word);
+      |                           ^~~~~~
+../Core/Src/7_seg_display_x4.c:191:27: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:119:11: warning: implicit declaration of function 'shift_reg' [-Wimplicit-function-declaration]
+  119 |           shift_reg(seconds, 12, SHIFT_REG_PINS);
+      |           ^~~~~~~~~
+../Core/Src/7_seg_display_x4.c:195:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  195 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[k]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c: In function 'display_word_multiple':
+../Core/Src/7_seg_display_x4.c:253:27: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  253 |         uint16_t length = strlen(word);
+      |                           ^~~~~~
+../Core/Src/7_seg_display_x4.c:253:27: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/7_seg_display_x4.c:257:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  257 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/rbg_led.c: In function 'shift_reg':
+../Core/Src/7_seg_display_x4.c:262:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  262 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:266:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  266 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[1]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/rbg_led.c:16:20: warning: implicit declaration of function 'powl' [-Wimplicit-function-declaration]
+   16 |         long msb = powl(2, len-1);
+      |                    ^~~~
+../Core/Src/rbg_led.c:9:1: note: include '<math.h>' or provide a declaration of 'powl'
+    8 | #include "7_seg_display_x4.h"
+  +++ |+#include <math.h>
+    9 | #include "stm32f4xx_hal.h"
+../Core/Src/rbg_led.c:16:20: warning: incompatible implicit declaration of built-in function 'powl' [-Wbuiltin-declaration-mismatch]
+   16 |         long msb = powl(2, len-1);
+      |                    ^~~~
+../Core/Src/7_seg_display_x4.c:272:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  272 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/rbg_led.c:16:20: note: include '<math.h>' or provide a declaration of 'powl'
+../Core/Src/rbg_led.c:22:71: warning: suggest parentheses around comparison in operand of '&' [-Wparentheses]
+   22 |                 HAL_GPIO_WritePin(GPIOC, data, (shift_set << k) & msb == 0? 0 : 1);
+      |                                                                   ~~~~^~~~
+../Core/Src/7_seg_display_x4.c:276:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  276 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[1]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:280:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  280 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[2]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:288:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  288 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:292:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  292 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[1]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:296:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  296 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[2]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:300:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  300 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[3]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:310:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  310 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~
+../Core/Src/7_seg_display_x4.c:314:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  314 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset+1]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~~~
+../Core/Src/7_seg_display_x4.c:318:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  318 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset+2]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~~~
+../Core/Src/7_seg_display_x4.c:322:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  322 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset+3]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~~~
+arm-none-eabi-gcc -o "led_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\led_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_display.elf
+ 
+arm-none-eabi-size  led_display.elf 
+arm-none-eabi-objdump -h -S led_display.elf  > "led_display.list"
+   text	   data	    bss	    dec	    hex	filename
+  14264	    112	   1952	  16328	   3fc8	led_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_display.list
+ 
+13:24:45 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-size  led_display.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14264	    112	   1952	  16328	   3fc8	led_display.elf
+Finished building: default.size.stdout
+ 
+13:24:57 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-size  led_display.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14264	    112	   1952	  16328	   3fc8	led_display.elf
+Finished building: default.size.stdout
+ 
+13:25:37 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-size  led_display.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14264	    112	   1952	  16328	   3fc8	led_display.elf
+Finished building: default.size.stdout
+ 
+13:25:46 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-size  led_display.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14264	    112	   1952	  16328	   3fc8	led_display.elf
+Finished building: default.size.stdout
+ 
+13:27:25 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-size  led_display.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14264	    112	   1952	  16328	   3fc8	led_display.elf
+Finished building: default.size.stdout
+ 
+13:27:41 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-size  led_display.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14264	    112	   1952	  16328	   3fc8	led_display.elf
+Finished building: default.size.stdout
+ 
+13:27:53 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:119:11: warning: implicit declaration of function 'shift_reg' [-Wimplicit-function-declaration]
+  119 |           shift_reg(seconds, 12, SHIFT_REG_PINS);
+      |           ^~~~~~~~~
+arm-none-eabi-gcc -o "led_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\led_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_display.elf
+ 
+arm-none-eabi-size  led_display.elf 
+arm-none-eabi-objdump -h -S led_display.elf  > "led_display.list"
+   text	   data	    bss	    dec	    hex	filename
+  14272	    112	   1952	  16336	   3fd0	led_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_display.list
+ 
+13:29:47 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:119:34: warning: passing argument 3 of 'shift_reg' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  119 |           shift_reg(seconds, 12, SHIFT_REG_PINS);
+      |                                  ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/rbg_led.h:11:54: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'const uint16_t *' {aka 'const short unsigned int *'}
+   11 | void shift_reg(long shift_set, uint8_t len, uint16_t pins[3]);
+      |                                             ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "led_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\led_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_display.elf
+ 
+arm-none-eabi-size  led_display.elf 
+arm-none-eabi-objdump -h -S led_display.elf  > "led_display.list"
+   text	   data	    bss	    dec	    hex	filename
+  14272	    112	   1952	  16336	   3fd0	led_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_display.list
+ 
+13:31:08 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-size  led_display.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14272	    112	   1952	  16336	   3fd0	led_display.elf
+Finished building: default.size.stdout
+ 
+13:35:32 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-size  led_display.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14272	    112	   1952	  16336	   3fd0	led_display.elf
+Finished building: default.size.stdout
+ 
+13:36:32 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-size  led_display.elf 
+   text	   data	    bss	    dec	    hex	filename
+  14272	    112	   1952	  16336	   3fd0	led_display.elf
+Finished building: default.size.stdout
+ 
+13:39:36 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:119:33: warning: passing argument 3 of 'shift_reg' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  119 |           shift_reg(0xF0F0, 12, SHIFT_REG_PINS);
+      |                                 ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/rbg_led.h:11:54: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'const uint16_t *' {aka 'const short unsigned int *'}
+   11 | void shift_reg(long shift_set, uint8_t len, uint16_t pins[3]);
+      |                                             ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "led_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\led_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_display.elf
+ 
+arm-none-eabi-size  led_display.elf 
+arm-none-eabi-objdump -h -S led_display.elf  > "led_display.list"
+   text	   data	    bss	    dec	    hex	filename
+  14272	    112	   1952	  16336	   3fd0	led_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_display.list
+ 
+13:41:59 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/rbg_led.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/rbg_led.d" -MT"Core/Src/rbg_led.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/rbg_led.o"
+../Core/Src/rbg_led.c: In function 'shift_reg':
+../Core/Src/rbg_led.c:16:20: warning: implicit declaration of function 'powl' [-Wimplicit-function-declaration]
+   16 |         long msb = powl(2, len-1);
+      |                    ^~~~
+../Core/Src/rbg_led.c:9:1: note: include '<math.h>' or provide a declaration of 'powl'
+    8 | #include "7_seg_display_x4.h"
+  +++ |+#include <math.h>
+    9 | #include "stm32f4xx_hal.h"
+../Core/Src/rbg_led.c:16:20: warning: incompatible implicit declaration of built-in function 'powl' [-Wbuiltin-declaration-mismatch]
+   16 |         long msb = powl(2, len-1);
+      |                    ^~~~
+../Core/Src/rbg_led.c:16:20: note: include '<math.h>' or provide a declaration of 'powl'
+arm-none-eabi-gcc -o "led_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\led_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_display.elf
+ 
+arm-none-eabi-size  led_display.elf 
+arm-none-eabi-objdump -h -S led_display.elf  > "led_display.list"
+   text	   data	    bss	    dec	    hex	filename
+  14256	    112	   1952	  16320	   3fc0	led_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_display.list
+ 
+13:42:21 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:119:34: warning: passing argument 3 of 'shift_reg' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  119 |           shift_reg(seconds, 12, SHIFT_REG_PINS);
+      |                                  ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/rbg_led.h:11:54: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'const uint16_t *' {aka 'const short unsigned int *'}
+   11 | void shift_reg(long shift_set, uint8_t len, uint16_t pins[3]);
+      |                                             ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "led_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\led_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_display.elf
+ 
+arm-none-eabi-size  led_display.elf 
+arm-none-eabi-objdump -h -S led_display.elf  > "led_display.list"
+   text	   data	    bss	    dec	    hex	filename
+  14256	    112	   1952	  16320	   3fc0	led_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_display.list
+ 
+13:43:30 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:119:34: warning: passing argument 3 of 'shift_reg' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  119 |           shift_reg(seconds, 12, SHIFT_REG_PINS);
+      |                                  ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/rbg_led.h:11:54: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'const uint16_t *' {aka 'const short unsigned int *'}
+   11 | void shift_reg(long shift_set, uint8_t len, uint16_t pins[3]);
+      |                                             ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "led_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\led_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_display.elf
+ 
+arm-none-eabi-size  led_display.elf 
+arm-none-eabi-objdump -h -S led_display.elf  > "led_display.list"
+   text	   data	    bss	    dec	    hex	filename
+  14256	    112	   1952	  16320	   3fc0	led_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_display.list
+ 
+13:46:34 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:119:32: warning: passing argument 3 of 'shift_reg' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  119 |           shift_reg(0xE00, 12, SHIFT_REG_PINS);
+      |                                ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/rbg_led.h:11:54: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'const uint16_t *' {aka 'const short unsigned int *'}
+   11 | void shift_reg(long shift_set, uint8_t len, uint16_t pins[3]);
+      |                                             ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "led_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\led_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_display.elf
+ 
+arm-none-eabi-size  led_display.elf 
+arm-none-eabi-objdump -h -S led_display.elf  > "led_display.list"
+   text	   data	    bss	    dec	    hex	filename
+  14256	    112	   1952	  16320	   3fc0	led_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_display.list
+ 
+13:47:05 **** Incremental Build of configuration Debug for project led_display ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:119:30: warning: passing argument 3 of 'shift_reg' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  119 |           shift_reg(0x7, 12, SHIFT_REG_PINS);
+      |                              ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/rbg_led.h:11:54: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'const uint16_t *' {aka 'const short unsigned int *'}
+   11 | void shift_reg(long shift_set, uint8_t len, uint16_t pins[3]);
+      |                                             ~~~~~~~~~^~~~~~~
+arm-none-eabi-gcc -o "led_display.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\led_display\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="led_display.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: led_display.elf
+ 
+arm-none-eabi-size  led_display.elf 
+arm-none-eabi-objdump -h -S led_display.elf  > "led_display.list"
+   text	   data	    bss	    dec	    hex	filename
+  14256	    112	   1952	  16320	   3fc0	led_display.elf
+Finished building: default.size.stdout
+ 
+Finished building: led_display.list
+ 

@@ -1,0 +1,88 @@
+16:29:43 **** Incremental Build of configuration Debug for project test ****
+make -j16 all 
+arm-none-eabi-gcc "../Core/Src/7_seg_display_x4.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/7_seg_display_x4.d" -MT"Core/Src/7_seg_display_x4.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/7_seg_display_x4.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F401xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/7_seg_display_x4.c: In function 'display_word_single':
+../Core/Src/7_seg_display_x4.c:192:27: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+  192 |         uint16_t length = strlen(word);
+      |                           ^~~~~~
+../Core/Src/7_seg_display_x4.c:9:1: note: include '<string.h>' or provide a declaration of 'strlen'
+    8 | #include "7_seg_display_x4.h"
+  +++ |+#include <string.h>
+    9 | #include "stm32f4xx_hal.h"
+../Core/Src/7_seg_display_x4.c:192:27: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  192 |         uint16_t length = strlen(word);
+      |                           ^~~~~~
+../Core/Src/7_seg_display_x4.c:192:27: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/7_seg_display_x4.c:196:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  196 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[k]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c: In function 'display_word_multiple':
+../Core/Src/7_seg_display_x4.c:253:27: warning: incompatible implicit declaration of built-in function 'strlen' [-Wbuiltin-declaration-mismatch]
+  253 |         uint16_t length = strlen(word);
+      |                           ^~~~~~
+../Core/Src/7_seg_display_x4.c:253:27: note: include '<string.h>' or provide a declaration of 'strlen'
+../Core/Src/7_seg_display_x4.c:257:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  257 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:262:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  262 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:266:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  266 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[1]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:272:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  272 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:276:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  276 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[1]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:280:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  280 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[2]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:288:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  288 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[0]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:292:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  292 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[1]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:296:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  296 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[2]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:300:59: warning: array subscript has type 'char' [-Wchar-subscripts]
+  300 |                 seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[3]], ser_pin, clk_pin, latch_pin);
+      |                                                       ~~~~^~~
+../Core/Src/7_seg_display_x4.c:310:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  310 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~
+../Core/Src/7_seg_display_x4.c:314:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  314 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset+1]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~~~
+../Core/Src/7_seg_display_x4.c:318:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  318 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset+2]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~~~
+../Core/Src/7_seg_display_x4.c:322:83: warning: array subscript has type 'char' [-Wchar-subscripts]
+  322 |                                         seven_seg_shift_reg(CHAR_TO_SEVEN_SEG[word[offset+3]], ser_pin, clk_pin, latch_pin);
+      |                                                                               ~~~~^~~~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:116:75: warning: passing argument 6 of 'display_num_multiple' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+  116 |           display_num_multiple(seconds, 10, DATA_PIN, CLK_PIN, LATCH_PIN, SEGMENT_PINS);
+      |                                                                           ^~~~~~~~~~~~
+In file included from ../Core/Src/main.c:25:
+../Core/Inc/7_seg_display_x4.h:17:117: note: expected 'uint16_t *' {aka 'short unsigned int *'} but argument is of type 'const uint16_t *' {aka 'const short unsigned int *'}
+   17 | void display_num_multiple(uint16_t num, int speed, uint16_t ser_pin, uint16_t clk_pin, uint16_t latch_pin, uint16_t seg_pins[4]);
+      |                                                                                                            ~~~~~~~~~^~~~~~~~~~~
+arm-none-eabi-gcc -o "test.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\1miln\Desktop\Projects\hardware_2048\firmware\test\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="test.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: test.elf
+ 
+arm-none-eabi-size  test.elf 
+arm-none-eabi-objdump -h -S test.elf  > "test.list"
+   text	   data	    bss	    dec	    hex	filename
+   8620	     12	   1644	  10276	   2824	test.elf
+Finished building: default.size.stdout
+ 
+Finished building: test.list
+ 
+
+16:29:45 Build Finished. 0 errors, 19 warnings. (took 1s.860ms)
+
