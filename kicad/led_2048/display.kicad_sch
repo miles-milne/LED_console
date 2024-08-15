@@ -6079,7 +6079,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 39.37 63.5 0)
 			(effects
 				(font
@@ -6292,7 +6292,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 39.37 114.3 0)
 			(effects
 				(font
@@ -6369,7 +6369,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 171.45 38.1 0)
 			(effects
 				(font
@@ -6446,7 +6446,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 105.41 139.7 0)
 			(effects
 				(font
@@ -6591,7 +6591,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 39.37 38.1 0)
 			(effects
 				(font
@@ -6668,7 +6668,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 171.45 114.3 0)
 			(effects
 				(font
@@ -6745,7 +6745,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 171.45 63.5 0)
 			(effects
 				(font
@@ -6822,7 +6822,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 138.43 38.1 0)
 			(effects
 				(font
@@ -6899,7 +6899,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 72.39 88.9 0)
 			(effects
 				(font
@@ -6976,7 +6976,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 171.45 88.9 0)
 			(effects
 				(font
@@ -7053,7 +7053,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 138.43 139.7 0)
 			(effects
 				(font
@@ -7130,7 +7130,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 72.39 38.1 0)
 			(effects
 				(font
@@ -7207,7 +7207,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 138.43 114.3 0)
 			(effects
 				(font
@@ -7416,7 +7416,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 105.41 88.9 0)
 			(effects
 				(font
@@ -7559,7 +7559,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 138.43 63.5 0)
 			(effects
 				(font
@@ -7654,6 +7654,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
+			(at 261.62 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C431646"
 			(at 261.62 58.42 0)
 			(effects
 				(font
@@ -7845,7 +7854,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://item.szlcsc.com/191765.html"
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlc59116-q1.pdf?ts=1723061996587&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTLC59116-Q1%252Fpart-details%252FTLC59116ITPWRQ1%253Fbm-verify%253DAAQAAAAJ_____69QKPd5Itn_pAggT7eJNdg_7UVTr4kMtfmGunJ_E1qWZM59lGjmWXDS10Y-4DMf-VTlYnjgEZUb8MZtYGMUZNrqy3r_7nOvQrETaIoJL_yMrJwMOIV91USEwTpMw2DLk8kZwCSeCM9PlJzb4U6bVyEPvuopbh6r39AAdK8MF3X_SP3DT-S77HIRUALvuu622Q6960lrSrmNWtQGHB-5b5k0fK4yu98M_8Q_aSpB3pdis0vlHGq1hTcvn79nWoTGTIFNFFqpYqdwnogziH66dkZMvm5EJbcRYNhUMR8zVKpi2Btg0vIi4att2orZ7UAyarfNXvraZvwkvurfY90rla1_nOtSFkEk"
 			(at 236.474 83.693 0)
 			(effects
 				(font
@@ -7995,7 +8004,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 105.41 38.1 0)
 			(effects
 				(font
@@ -8072,7 +8081,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 39.37 139.7 0)
 			(effects
 				(font
@@ -8149,7 +8158,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 105.41 114.3 0)
 			(effects
 				(font
@@ -8226,7 +8235,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 105.41 63.5 0)
 			(effects
 				(font
@@ -8303,7 +8312,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 72.39 114.3 0)
 			(effects
 				(font
@@ -8380,7 +8389,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 72.39 139.7 0)
 			(effects
 				(font
@@ -8457,7 +8466,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 72.39 63.5 0)
 			(effects
 				(font
@@ -8534,7 +8543,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 39.37 88.9 0)
 			(effects
 				(font
@@ -8611,7 +8620,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 138.43 88.9 0)
 			(effects
 				(font
@@ -8688,7 +8697,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_THT:LED_D5.0mm-4_RGB"
+		(property "Footprint" "2048_footprints:LED_D5.0mm-4x0.8mm_RGB"
 			(at 171.45 139.7 0)
 			(effects
 				(font

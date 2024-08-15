@@ -2939,17 +2939,6 @@
 		)
 		(uuid "6863fb11-c932-47a7-80be-21e00d1f4405")
 	)
-	(label "Button 2"
-		(at 184.15 121.92 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "6d6211ba-566a-46d1-afb7-1c6a37bdb291")
-	)
 	(label "Button 6"
 		(at 220.98 97.79 180)
 		(fields_autoplaced yes)
@@ -2982,28 +2971,6 @@
 			(justify left bottom)
 		)
 		(uuid "8f737457-2b1e-41df-aa28-9dc9c0b7be3c")
-	)
-	(label "Button 3"
-		(at 140.97 121.92 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "928572a0-266d-4428-807f-db728f658450")
-	)
-	(label "Button 4"
-		(at 100.33 121.92 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9ea388b0-6fd3-4282-8f47-83117bbfb54f")
 	)
 	(label "Button 3"
 		(at 220.98 90.17 180)

@@ -4032,6 +4032,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C17557"
+			(at 237.49 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "94ea1535-2994-428b-995e-669dc7e61066")
 		)
@@ -4100,6 +4109,15 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
+			(at 217.17 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17557"
 			(at 217.17 66.04 0)
 			(effects
 				(font
@@ -4525,6 +4543,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C17557"
+			(at 237.49 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "b404948a-0efc-470c-bf5c-dea6907a2f0d")
 		)
@@ -4673,6 +4700,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C17557"
+			(at 217.17 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "345fd0e1-afe8-403a-a7ec-8d8a67189b9b")
 		)
@@ -4741,6 +4777,15 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
+			(at 207.01 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17557"
 			(at 207.01 93.98 0)
 			(effects
 				(font
@@ -5817,6 +5862,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C18164493"
+			(at 191.77 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "6"
 			(uuid "7569557a-44da-4f10-bc91-5ef0e85087a6")
 		)
@@ -6071,6 +6125,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C17557"
+			(at 227.33 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "5339eb97-f887-4457-9eae-176a8eb152ba")
 		)
@@ -6139,6 +6202,15 @@
 			)
 		)
 		(property "Description" "Resistor, US symbol"
+			(at 227.33 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C17557"
 			(at 227.33 93.98 0)
 			(effects
 				(font

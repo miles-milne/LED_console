@@ -1,0 +1,29 @@
+Ref,Val,Package,PosX,PosY,Rot,Side
+"C1","0.1uF","C_0402_1005Metric_Pad0.74x0.62mm_HandSolder",213.075000,-85.900000,90.000000,bottom
+"C2","2.2uF","C_0603_1608Metric_Pad1.08x0.95mm_HandSolder",213.075000,-89.100000,-90.000000,bottom
+"C4","0.1uF","C_0402_1005Metric_Pad0.74x0.62mm_HandSolder",186.875000,-95.200000,-90.000000,bottom
+"C5","0.1uF","C_0402_1005Metric_Pad0.74x0.62mm_HandSolder",186.600000,-85.800000,180.000000,bottom
+"C9","0.1uF","C_0402_1005Metric_Pad0.74x0.62mm_HandSolder",197.875000,-91.100000,-90.000000,bottom
+"C10","0.1uF","C_0402_1005Metric_Pad0.74x0.62mm_HandSolder",208.400000,-89.500000,90.000000,bottom
+"J2","Button conn left","PinSocket_2x02_P2.00mm_Vertical",180.780801,-87.935721,90.000000,bottom
+"J3","Button conn left","PinSocket_2x02_P2.00mm_Vertical",215.550000,-93.775000,-90.000000,bottom
+"J5","Misc conn 2","PinSocket_1x02_P2.00mm_Vertical",184.290000,-92.870000,180.000000,bottom
+"J7","PinSocket_1x04_P2.00mm_Vertical","PinSocket_1x04_P2.00mm_Vertical",218.675000,-55.300000,-90.000000,bottom
+"Q1","PNP","SOT-23-3",182.375000,-53.209835,0.000000,bottom
+"Q2","PNP","SOT-23-3",182.375000,-59.709835,0.000000,bottom
+"Q3","PNP","SOT-23-3",182.375000,-65.959835,0.000000,bottom
+"Q4","PNP","SOT-23-3",182.375000,-72.209835,0.000000,bottom
+"Q5","PNP","SOT-23-3",182.375000,-78.459835,0.000000,bottom
+"R4","52.3k","R_0603_1608Metric_Pad0.98x0.95mm_HandSolder",214.575000,-85.550000,-90.000000,bottom
+"R5","1k (DNP)","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",210.475000,-87.300000,0.000000,bottom
+"R6","30.1k","R_0603_1608Metric_Pad0.98x0.95mm_HandSolder",216.375000,-83.700000,-90.000000,bottom
+"R7","1k","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",182.375000,-56.459835,0.000000,bottom
+"R8","1k","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",182.375000,-62.709835,0.000000,bottom
+"R9","1k","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",182.075000,-69.000000,0.000000,bottom
+"R10","1k","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",182.175000,-75.200000,0.000000,bottom
+"R11","1k","R_0805_2012Metric_Pad1.20x1.40mm_HandSolder",182.275000,-81.400000,0.000000,bottom
+"REF**","PinSocket_1x02_P2.00mm_Vertical","PinSocket_1x02_P2.00mm_Vertical",218.100000,-94.700000,0.000000,bottom
+"REF**","PinSocket_1x02_P2.00mm_Vertical","PinSocket_1x02_P2.00mm_Vertical",218.900000,-49.300000,180.000000,bottom
+"U1","TPS73701DRVR","WSON-6_L2.0-W2.0-P0.65-BL-EP",218.875000,-85.809835,90.000000,bottom
+"U2","STM32F303CBTx","LQFP-48_7x7mm_P0.5mm",191.387500,-90.384835,180.000000,bottom
+"U3","TLC59116ITPWRQ1","TSSOP-28_L9.7-W4.4-P0.65-LS6.4-BL",203.690761,-84.775083,90.000000,bottom
