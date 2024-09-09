@@ -1,0 +1,14 @@
+/*
+ * led_2048.cpp
+ *
+ *  Created on: Sep 5, 2024
+ *      Author: 1miln
+ */
+
+
+// add led_2048.h
+// call cpp_main() in main.c
+
+int cpp_main() {
+
+}

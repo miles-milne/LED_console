@@ -7243,6 +7243,7 @@
 			(uuid "ded95708-b80d-40d7-903c-fb116c86f44c")
 		)
 		(model "C:/Users/1miln/Desktop/Projects/hardware_2048/solidworks/push_button.STEP"
+			(hide yes)
 			(offset
 				(xyz 0 0 0)
 			)

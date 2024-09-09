@@ -1,0 +1,11 @@
+../Core/Src/main.cpp:112:5:int main()	2
+../Core/Src/main.cpp:239:6:void SystemClock_Config()	4
+../Core/Src/main.cpp:283:13:void MX_I2C1_Init()	4
+../Core/Src/main.cpp:331:13:void MX_GPIO_Init()	1
+../Core/Src/main.cpp:397:6:void TLC_init()	1
+../Core/Src/main.cpp:412:6:void row_off()	1
+../Core/Src/main.cpp:417:6:void row_on()	1
+../Core/Src/main.cpp:423:6:void LED_heartbeat()	2
+../Core/Src/main.cpp:438:9:uint8_t set_LEDs(uint8_t*)	1
+../Core/Src/main.cpp:451:6:void display(uint8_t**)	2
+../Core/Src/main.cpp:501:6:void Error_Handler()	1

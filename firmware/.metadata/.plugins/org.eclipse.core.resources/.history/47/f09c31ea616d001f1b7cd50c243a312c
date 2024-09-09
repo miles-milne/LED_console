@@ -1,0 +1,525 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2024 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+/* Includes ------------------------------------------------------------------*/
+#include <game_2048.h>
+#include "main.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+#define HIGH GPIO_PIN_SET
+#define LOW GPIO_PIN_RESET
+#define I2C_TIMEOUT 2000
+
+
+// keep this undefined if you want afterglow protection
+//#define afterglow
+
+#define TLC_ADDRESS 0xC0
+#define TLC_PWM_MODE 0xFF // see section 9.6.6 of the led driver datasheet
+
+// TLC Registers
+#define MODE1 0x00 // w/o auto increment
+#define LEDOUT0 0x94 // w/ auto increment
+#define PWM0 0xA2 // w/ auto increment
+
+
+// PORT A GPIOs
+#define BUTTON_1 GPIO_PIN_11
+#define BUTTON_2 GPIO_PIN_10
+#define BUTTON_3 GPIO_PIN_12
+#define BUTTON_4 GPIO_PIN_9
+#define TLC_RESET GPIO_PIN_15
+
+
+// PORT B GPIOs
+#define SCORE_DAT GPIO_PIN_0
+#define SCORE_LAT GPIO_PIN_1
+#define SCORE_CLK GPIO_PIN_2
+#define MUX_1 GPIO_PIN_3
+#define MUX_2 GPIO_PIN_4
+#define MUX_3 GPIO_PIN_5
+#define MUX_4 GPIO_PIN_6
+#define MUX_5 GPIO_PIN_7
+#define MUX_PORT GPIOB
+
+
+// PORT C GPIOs
+#define LED_R_DEBUG GPIO_PIN_13
+#define LED_B_DEBUG GPIO_PIN_14
+#define LED_G_DEBUG GPIO_PIN_15
+
+
+
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+I2C_HandleTypeDef hi2c1;
+
+/* USER CODE BEGIN PV */
+
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_I2C1_Init(void);
+/* USER CODE BEGIN PFP */
+
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration--------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_I2C1_Init();
+  /* USER CODE BEGIN 2 */
+
+  // Turns off some of the debug leds
+  HAL_GPIO_WritePin(GPIOC, LED_B_DEBUG, HIGH);
+  HAL_GPIO_WritePin(GPIOC, LED_G_DEBUG, HIGH);
+
+
+
+  // Turns off all multiplexer pins
+  HAL_GPIO_WritePin(MUX_PORT, MUX_1, HIGH);
+  HAL_GPIO_WritePin(MUX_PORT, MUX_2, HIGH);
+  HAL_GPIO_WritePin(MUX_PORT, MUX_3, HIGH);
+  HAL_GPIO_WritePin(MUX_PORT, MUX_4, HIGH);
+  HAL_GPIO_WritePin(MUX_PORT, MUX_5, HIGH);
+
+  // LED driver initalization
+  TLC_init();
+
+  // boot-up delay
+  // HAL_Delay(100);
+
+
+  uint32_t status_diff_millis = HAL_GetTick();
+  uint32_t led_diff_millis = HAL_GetTick();
+  uint8_t r1 = 5, g1 = 17, b1 = 9;
+
+  uint8_t grid[25] =
+  	  {0, 0, 0, 0, 0,
+  	   0, 0, 0, 0, 0,
+	   0, 0, 0, 0, 0,
+	   0, 0, 0, 0, 0,
+	   0, 0, 0, 0, 0
+  	  };
+
+  uint8_t colours[15] =
+  	  {0x00, 0x00, 0x00, // off
+  	   0x32, 0x00, 0x00, // red
+	   0x32, 0x32, 0x00, // yellow
+	   0x00, 0x32, 0x00,
+	   0x00, 0x32, 0x32
+  	  };
+
+  // uses autoincrement to set 15 leds with a single I2C commands
+  uint8_t *row1_buf, *row2_buf, *row3_buf, *row4_buf, *row5_buf;
+
+
+
+
+  uint8_t rainbow_on[17] = {PWM0, 0xFF, 0, 0, 0xFF, 0xFF, 0, 0, 0xFF, 0, 0, 0xFF, 0xFF, 0, 0, 0xFF, 0};
+  uint8_t rainbow_mid[17] = {PWM0, 16, 0, 0, 16, 16, 0, 0, 16, 0, 0, 16, 16, 0, 0, 16, 0};
+  uint8_t rainbow_dim[17] = {PWM0, 8, 0, 0, 8, 8, 0, 0, 8, 0, 0, 8, 8, 0, 0, 8, 0};
+  uint8_t all_off[17] = {PWM0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  uint8_t all_dim[17] = {PWM0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
+
+
+  row1_buf = rainbow_on;
+  row2_buf = all_off;
+  row3_buf = rainbow_on;
+  row4_buf = all_off;
+  row5_buf = rainbow_on;
+  uint8_t* matrix[5] = {row1_buf, row2_buf, row3_buf, row4_buf, row5_buf};
+
+
+  // for mux, LOW means on and HIGH means off ????? KILL ME
+
+
+
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+
+	display(matrix);
+
+
+	if (HAL_GetTick() - status_diff_millis > 1000) {
+		status_diff_millis = HAL_GetTick();
+		LED_heartbeat();
+	}
+
+  }
+
+  HAL_GPIO_WritePin(GPIOA, TLC_RESET, LOW);
+  HAL_PWR_EnableSleepOnExit();
+
+
+  /* USER CODE END 3 */
+}
+
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
+void SystemClock_Config(void)
+{
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C1;
+  PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_HSI;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C1_Init(void)
+{
+
+	  /* USER CODE BEGIN I2C1_Init 0 */
+
+	  /* USER CODE END I2C1_Init 0 */
+
+	  /* USER CODE BEGIN I2C1_Init 1 */
+
+	  /* USER CODE END I2C1_Init 1 */
+	  hi2c1.Instance = I2C1;
+	  hi2c1.Init.Timing = 0x0000020B;
+	  hi2c1.Init.OwnAddress1 = 0;
+	  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+	  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+	  hi2c1.Init.OwnAddress2 = 0;
+	  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+	  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+	  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+	  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+	  {
+	    Error_Handler();
+	  }
+
+	  /** Configure Analogue filter
+	  */
+	  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+	  {
+	    Error_Handler();
+	  }
+
+	  /** Configure Digital filter
+	  */
+	  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
+	  {
+	    Error_Handler();
+	  }
+	  /* USER CODE BEGIN I2C1_Init 2 */
+
+	  /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+/* USER CODE BEGIN MX_GPIO_Init_1 */
+/* USER CODE END MX_GPIO_Init_1 */
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_15, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6
+                          |GPIO_PIN_7, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : PC13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA0 PA1 PA2 PA3
+                           PA8 PA9 PA10 PA11
+                           PA12 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
+                          |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11
+                          |GPIO_PIN_12;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA4 PA5 PA15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB3 PB4 PB5 PB6
+                           PB7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6
+                          |GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+/* USER CODE BEGIN MX_GPIO_Init_2 */
+/* USER CODE END MX_GPIO_Init_2 */
+}
+
+/* USER CODE BEGIN 4 */
+
+void TLC_init() {
+
+	// Reset pin must be held high for LED driver to not be standby mode
+	HAL_GPIO_WritePin(GPIOA, TLC_RESET, LOW);
+	HAL_GPIO_WritePin(GPIOA, TLC_RESET, HIGH);
+
+	uint8_t buffer[2] = {MODE1, 0x01}; // Initialized to MODE1 register init; see section 9.6.1
+	HAL_I2C_Master_Transmit(&hi2c1, TLC_ADDRESS, buffer, 2, HAL_MAX_DELAY);
+
+#ifdef afterglow
+	row_on();
+#endif
+}
+
+
+void row_off() {
+	uint8_t buffer[5] = {LEDOUT0, 0x00, 0x00, 0x00, 0x00};
+	HAL_I2C_Master_Transmit(&hi2c1, TLC_ADDRESS, buffer, 5, HAL_MAX_DELAY);
+}
+
+void row_on() {
+	uint8_t buffer[5] = {LEDOUT0, TLC_PWM_MODE, TLC_PWM_MODE, TLC_PWM_MODE, TLC_PWM_MODE};
+	HAL_I2C_Master_Transmit(&hi2c1, TLC_ADDRESS, buffer, 5, HAL_MAX_DELAY);
+}
+
+
+void LED_heartbeat() {
+	static uint8_t led_on = 0;
+
+	if (led_on) {
+		HAL_GPIO_WritePin(GPIOC, LED_R_DEBUG, HIGH);
+		led_on = 0;
+	}
+	else {
+		HAL_GPIO_WritePin(GPIOC, LED_R_DEBUG, LOW);
+		led_on = 1;
+	}
+
+}
+
+
+uint8_t set_LEDs(uint8_t* row_buffer) {
+
+
+#ifndef afterglow
+	row_off();
+#endif
+
+	// sets the colours of the LEDs
+	HAL_I2C_Master_Transmit(&hi2c1, TLC_ADDRESS, row_buffer, 17, HAL_MAX_DELAY);
+
+	return 1;
+}
+
+void display(uint8_t** rows) {
+
+
+	for (int k = 0; k < 5; ++k) {
+		set_LEDs(rows[k]);
+		HAL_GPIO_WritePin(MUX_PORT, MUX_1 << ((k+4)%5), HIGH);
+		HAL_GPIO_WritePin(MUX_PORT, MUX_1 << k, LOW);
+	#ifndef afterglow
+		row_on();
+	#endif
+
+}
+
+	/*
+	set_LEDs(rows[0]);
+	HAL_GPIO_WritePin(GPIOB, MUX_5, HIGH);
+	HAL_GPIO_WritePin(GPIOB, MUX_1, LOW);
+	row_on();
+
+	set_LEDs(rows[1]);
+	HAL_GPIO_WritePin(GPIOB, MUX_1, HIGH);
+	HAL_GPIO_WritePin(GPIOB, MUX_2, LOW);
+	row_on();
+
+	set_LEDs(rows[2]);
+	HAL_GPIO_WritePin(GPIOB, MUX_2, HIGH);
+	HAL_GPIO_WritePin(GPIOB, MUX_3, LOW);
+	row_on();
+
+
+	set_LEDs(rows[3]);
+	HAL_GPIO_WritePin(GPIOB, MUX_3, HIGH);
+	HAL_GPIO_WritePin(GPIOB, MUX_4, LOW);
+	row_on();
+
+
+	set_LEDs(rows[4]);
+	HAL_GPIO_WritePin(GPIOB, MUX_4, HIGH);
+	HAL_GPIO_WritePin(GPIOB, MUX_5, LOW);
+	row_on();
+	*/
+}
+
+
+/* USER CODE END 4 */
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+  __disable_irq();
+  while (1)
+  {
+  }
+  /* USER CODE END Error_Handler_Debug */
+}
+
+#ifdef  USE_FULL_ASSERT
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
+void assert_failed(uint8_t *file, uint32_t line)
+{
+  /* USER CODE BEGIN 6 */
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  /* USER CODE END 6 */
+}
+#endif /* USE_FULL_ASSERT */
