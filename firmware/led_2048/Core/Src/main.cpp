@@ -48,6 +48,8 @@
 
 #define TLC_ADDRESS 0xC0
 #define TLC_PWM_MODE 0xFF // see section 9.6.6 of the led driver datasheet
+#define TLC_OSC_OFF 0x10
+#define TLC_OSC_ON 0x01
 
 // TLC Registers
 #define MODE1 0x00 // w/o auto increment
@@ -56,11 +58,16 @@
 
 
 // PORT A GPIOs
-#define BUTTON_1 GPIO_PIN_11
-#define BUTTON_2 GPIO_PIN_10
-#define BUTTON_3 GPIO_PIN_12
-#define BUTTON_4 GPIO_PIN_9
+#define BUTTON_D1 GPIO_PIN_11
+#define BUTTON_U1 GPIO_PIN_10
+#define BUTTON_R1 GPIO_PIN_12
+#define BUTTON_L1 GPIO_PIN_9
+#define BUTTON_U2 GPIO_PIN_0
+#define BUTTON_R2 GPIO_PIN_1
+#define BUTTON_D2 GPIO_PIN_2
+#define BUTTON_L2 GPIO_PIN_3
 #define TLC_RESET GPIO_PIN_15
+#define BUTTON_PORT GPIOA
 
 
 // PORT B GPIOs
@@ -109,6 +116,8 @@ static void MX_I2C1_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
+
+
 int main(void)
 {
 
@@ -137,9 +146,9 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
-  // Turns off some of the debug leds
-  HAL_GPIO_WritePin(GPIOC, LED_B_DEBUG, HIGH);
-  HAL_GPIO_WritePin(GPIOC, LED_G_DEBUG, HIGH);
+  HAL_GPIO_WritePin(GPIOC, LED_R_DEBUG, HIGH);
+  HAL_GPIO_WritePin(GPIOC, LED_B_DEBUG, LOW);
+  HAL_GPIO_WritePin(GPIOC, LED_G_DEBUG, LOW);
 
 
 
@@ -150,57 +159,130 @@ int main(void)
   HAL_GPIO_WritePin(MUX_PORT, MUX_4, HIGH);
   HAL_GPIO_WritePin(MUX_PORT, MUX_5, HIGH);
 
-  // LED driver initalization
-  TLC_init();
-
-  // boot-up delay
-  // HAL_Delay(100);
-
-
   uint32_t status_diff_millis = HAL_GetTick();
   uint32_t led_diff_millis = HAL_GetTick();
-  uint8_t r1 = 5, g1 = 17, b1 = 9;
+
+
+  // colour ID system --> uint8_t, BBBBIIII
+  // [3:0] --> colour identifier -->
+  // [7:4] --> brightness: -->
+  // index = num & 0b11110000)*3;
+  // brightness = 16 * ((num>>4) + 1) - 1;
+  // buffer[i] = colours[index+i] * brightness)
+
+  /*
+#define RED_1 0b00000001
+#define YEL_1 0b00000010
+#define GRN_1 0b00000011
+#define CYN_1 0b00000100
+#define BLU_1 0b00000101
+#define MAG_1 0b00000110
+#define WHT_1 0b00000111
+
+#define RED_2 0b00010001
+#define YEL_2 0b00010010
+#define GRN_2 0b00010011
+#define CYN_2 0b00010100
+#define BLU_2 0b00010101
+#define MAG_2 0b00010110
+#define WHT_2 0b00010111
+
+#define RED_3 0b00100001
+#define YEL_3 0b00100010
+#define GRN_3 0b00100011
+#define CYN_3 0b00100100
+#define BLU_3 0b00100101
+#define MAG_3 0b00100110
+#define WHT_3 0b00100111
+   */
+
+  uint8_t colours[45] = {
+		  0, 0, 0, // null, 0
+		  2, 0, 0, // red, ID 1
+		  2, 2, 0, // yellow, ID 2
+		  0, 2, 0, // green, ID 3
+		  0, 2, 2, // cyan, ID 4
+		  0, 0, 2, // blue, ID 5
+		  2, 0, 2, // magenta, ID 6
+		  2, 2, 2, // white, ID 7
+		  2, 1, 0, // orange, ID 8
+		  1, 0, 2, // purple, ID 9
+		  1, 2, 0, // lime, ID 10
+		  0, 1, 2, // azure, ID 11
+		  0, 2, 1, // turqoise, ID 12
+		  2, 0, 1, // rose, ID 13
+		  2, 1, 2, // pink, ID 14
+  };
+
 
   uint8_t grid[25] =
-  	  {0, 0, 0, 0, 0,
-  	   0, 0, 0, 0, 0,
+	  {0, 0, 0, 0, 0,
+	   0, 0, 0, 0, 0,
 	   0, 0, 0, 0, 0,
 	   0, 0, 0, 0, 0,
 	   0, 0, 0, 0, 0
-  	  };
-
-  uint8_t colours[15] =
-  	  {0x00, 0x00, 0x00, // off
-  	   0x32, 0x00, 0x00, // red
-	   0x24, 0x32, 0x00, // yellow
-	   0x00, 0x32, 0x00,
-	   0x00, 0x32, 0x32
-  	  };
-
-  // uses autoincrement to set 15 leds with a single I2C commands
-  uint8_t *row1_buf, *row2_buf, *row3_buf, *row4_buf, *row5_buf;
+	};
 
 
+  /*
+  uint8_t grid[25] =
+    	  {RED_1, YEL_1, GRN_1, CYN_1, BLU_1,
+    	   0, 0, 0, 0, 0,
+  	   YEL_2, GRN_2, CYN_2, BLU_2, RED_2,
+  	   0, 0, 0, 0, 0,
+  	   GRN_3, CYN_3, BLU_3, RED_3, YEL_3
+    	  };
+
+*/
 
 
-  uint8_t rainbow_on[17] = {PWM0, 0xFF, 0, 0, 0xFF, 0xFF, 0, 0, 0xFF, 0, 0, 0xFF, 0xFF, 0, 0, 0xFF, 0};
-  uint8_t rainbow_mid[17] = {PWM0, 16, 0, 0, 16, 16, 0, 0, 16, 0, 0, 16, 16, 0, 0, 16, 0};
-  uint8_t rainbow_dim[17] = {PWM0, 8, 0, 0, 8, 8, 0, 0, 8, 0, 0, 8, 8, 0, 0, 8, 0};
-  uint8_t all_off[17] = {PWM0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-  uint8_t all_dim[17] = {PWM0, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
-
-  uint8_t rain1[17] = {PWM0, 32, 0, 0, 100, 30, 0, 20, 20, 0, 0, 32, 0, 0, 24, 12, 0};
+  // init variables that hold button data
 
 
-  row1_buf = rainbow_mid;
-  row2_buf = rain1;
-  row3_buf = rainbow_mid;
-  row4_buf = all_off;
-  row5_buf = rainbow_mid;
+  uint8_t button_states = 0xFF, prev_button_states = 0xFF;
+
+  uint16_t button_list[8] = {
+		  BUTTON_U1,
+		  BUTTON_R1,
+		  BUTTON_D1,
+		  BUTTON_L1,
+		  BUTTON_U2,
+		  BUTTON_R2,
+		  BUTTON_D2,
+		  BUTTON_L2
+  };
+
+  uint32_t button_time_diffs[8];
+
+  for (int btn = 0; btn < 8; btn++)
+	  button_time_diffs[btn] = HAL_GetTick();
+
+
+  //uint8_t rainbow_on[17] = {PWM0, 0xFF, 0, 0, 0xFF, 0xFF, 0, 0, 0xFF, 0, 0, 0xFF, 0xFF, 0, 0, 0xFF, 0};
+  //uint8_t rainbow_mid[17] = {PWM0, 16, 0, 0, 16, 16, 0, 0, 16, 0, 0, 16, 16, 0, 0, 16, 0};
+  //uint8_t rainbow_dim[17] = {PWM0, 8, 0, 0, 8, 8, 0, 0, 8, 0, 0, 8, 8, 0, 0, 8, 0};
+  //uint8_t all_off[17] = {PWM0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  //uint8_t all_dim[17] = {PWM0, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16};
+  //uint8_t rain1[17] = {PWM0, 32, 0, 0, 100, 30, 0, 20, 20, 0, 0, 32, 0, 0, 24, 12, 0};
+
+  uint8_t row1_buf[17], row2_buf[17], row3_buf[17], row4_buf[17], row5_buf[17];
   uint8_t* matrix[5] = {row1_buf, row2_buf, row3_buf, row4_buf, row5_buf};
 
+  for (int r = 0; r < 5; r++)
+	  matrix[r][0] = PWM0;
 
-  // for mux, LOW means on and HIGH means off ????? KILL ME
+  set_grid(matrix, grid, colours, 8);
+
+  // LED driver initalization
+  TLC_init();
+
+
+
+  HAL_GPIO_WritePin(GPIOC, LED_B_DEBUG, HIGH);
+  HAL_GPIO_WritePin(GPIOC, LED_G_DEBUG, HIGH);
+
+  uint8_t cursor_x = 0, cursor_y = 0, last_cursor = 0;
+
 
 
 
@@ -215,7 +297,44 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	display(matrix);
+
+	  if (prev_button_states != button_states) {
+
+
+		  if ((button_states&0x01) == 0 && (prev_button_states&0x01) != 0) {
+			  solid_colour_grid(grid, 0x01);
+		  }
+		  else if ((button_states&0x02) == 0 && (prev_button_states&0x02) != 0)
+		  {
+			  solid_colour_grid(grid, 0x02);
+		  }
+		  else if ((button_states&0x04) == 0 && (prev_button_states&0x04) != 0)
+		  {
+			  solid_colour_grid(grid, 0x03);
+		  }
+		  else if ((button_states&0x08) == 0 && (prev_button_states&0x08) != 0)
+		  {
+			  solid_colour_grid(grid, 0x04);
+		  }
+
+
+
+
+		  set_grid(matrix, grid, colours, 8);
+	  }
+
+
+
+
+
+
+
+	  prev_button_states = button_states;
+	  button_states = update_button_states(button_states, button_list, button_time_diffs);
+
+
+
+	  display(matrix);
 
 
 	if (HAL_GetTick() - status_diff_millis > 1000) {
@@ -400,7 +519,7 @@ void TLC_init() {
 	HAL_GPIO_WritePin(GPIOA, TLC_RESET, LOW);
 	HAL_GPIO_WritePin(GPIOA, TLC_RESET, HIGH);
 
-	uint8_t buffer[2] = {MODE1, 0x01}; // Initialized to MODE1 register init; see section 9.6.1
+	uint8_t buffer[2] = {MODE1, TLC_OSC_ON}; // Initialized to MODE1 register init; see section 9.6.1
 	HAL_I2C_Master_Transmit(&hi2c1, TLC_ADDRESS, buffer, 2, HAL_MAX_DELAY);
 
 #ifdef afterglow
@@ -435,7 +554,7 @@ void LED_heartbeat() {
 }
 
 
-uint8_t set_LEDs(uint8_t* row_buffer) {
+void set_LEDs(uint8_t* row_buffer) {
 
 
 #ifndef afterglow
@@ -444,8 +563,44 @@ uint8_t set_LEDs(uint8_t* row_buffer) {
 
 	// sets the colours of the LEDs
 	HAL_I2C_Master_Transmit(&hi2c1, TLC_ADDRESS, row_buffer, 17, HAL_MAX_DELAY);
+}
 
-	return 1;
+void set_grid(uint8_t** rows, uint8_t* grid, uint8_t* colours, uint8_t bright_modifier) {
+
+
+	uint8_t grid_index = 0, r, c, i, brightness, colour_id;
+
+	uint8_t col, test;
+
+	for (r = 0; r < 5; r++) {
+
+		for (c = 0; c < 5; c++) {
+
+			brightness = bright_modifier * ((grid[grid_index]>>4) + 1) - 1;
+			colour_id = (grid[grid_index] & 0b00001111)*3;
+
+			for (i = 0; i < 3; i++) {
+				test = colours[colour_id+i] * brightness;
+				col = (c*3) + i + 1;
+
+				rows[r][col] = test;
+			}
+
+			grid_index++;
+		}
+	}
+
+	//display_on();
+
+  // index = num & 0b11110000)*3;
+  // brightness = 16 * ((num>>4) + 1) - 1;
+  // buffer[i] = colours[index+i] * brightness)
+}
+
+void solid_colour_grid(uint8_t* grid, uint8_t colour) {
+	for (int i = 0; i < 25; i++) {
+		grid[i] = colour;
+	}
 }
 
 void display(uint8_t** rows) {
@@ -459,36 +614,35 @@ void display(uint8_t** rows) {
 		row_on();
 	#endif
 
+	}
 }
 
-	/*
-	set_LEDs(rows[0]);
-	HAL_GPIO_WritePin(GPIOB, MUX_5, HIGH);
-	HAL_GPIO_WritePin(GPIOB, MUX_1, LOW);
-	row_on();
+uint8_t update_button_states(uint8_t current_states, uint16_t* buttons, uint32_t* time_diff) {
 
-	set_LEDs(rows[1]);
-	HAL_GPIO_WritePin(GPIOB, MUX_1, HIGH);
-	HAL_GPIO_WritePin(GPIOB, MUX_2, LOW);
-	row_on();
+	uint8_t new_states = 0x00;
+	uint32_t* temp;
 
-	set_LEDs(rows[2]);
-	HAL_GPIO_WritePin(GPIOB, MUX_2, HIGH);
-	HAL_GPIO_WritePin(GPIOB, MUX_3, LOW);
-	row_on();
+	for (uint8_t btn = 0; btn < 8; btn++) {
+		temp = &time_diff[btn];
+		new_states |= ((query_button_change(temp, buttons[btn], (current_states>>btn)&0x01))<<btn);
+	}
 
 
-	set_LEDs(rows[3]);
-	HAL_GPIO_WritePin(GPIOB, MUX_3, HIGH);
-	HAL_GPIO_WritePin(GPIOB, MUX_4, LOW);
-	row_on();
+	return current_states ^ new_states;
+}
+
+uint8_t query_button_change(uint32_t* last_pressed, uint16_t button, uint8_t current_state) {
 
 
-	set_LEDs(rows[4]);
-	HAL_GPIO_WritePin(GPIOB, MUX_4, HIGH);
-	HAL_GPIO_WritePin(GPIOB, MUX_5, LOW);
-	row_on();
-	*/
+	if (HAL_GPIO_ReadPin(BUTTON_PORT, button) != current_state
+			&& HAL_GetTick() - *last_pressed > 10)
+	{
+		*last_pressed = HAL_GetTick();
+		return 1;
+	}
+
+
+	return 0;
 }
 
 

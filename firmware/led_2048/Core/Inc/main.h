@@ -56,10 +56,17 @@ void Error_Handler(void);
 
 void TLC_init();
 void LED_heartbeat();
-uint8_t set_LEDs(uint8_t* row_buffer);
+void set_LEDs(uint8_t* row_buffer);
+void set_grid(uint8_t** rows, uint8_t* grid, uint8_t* colours, uint8_t bright_modifier);
 void display(uint8_t** rows);
 void row_on();
 void row_off();
+void display_off();
+void display_on();
+uint8_t query_button_change(uint32_t* last_pressed, uint16_t button, uint8_t current_state);
+uint8_t update_button_states(uint8_t current_states, uint16_t* buttons, uint32_t* time_diff);
+void solid_colour_grid(uint8_t* grid, uint8_t colour);
+
 
 /* USER CODE END EFP */
 
