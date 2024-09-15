@@ -22,6 +22,10 @@ _autosave-*
 *-save.kicad_pcb
 fp-info-cache
 
+# STM32 files
+.metadata
+*.settings
+
 # Netlist files (exported from Eeschema)
 *.net
 
