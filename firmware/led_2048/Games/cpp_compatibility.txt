@@ -1,0 +1,3 @@
+Good guide for how to use cpp classes for STM32
+
+https://stackoverflow.com/questions/76597997/c-class-inclusion-with-the-stmcubeide

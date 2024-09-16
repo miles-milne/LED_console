@@ -1,16 +1,17 @@
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/new:174:33:void* operator new(std::size_t, void*)	16	static
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_deque.h:96:3:constexpr std::size_t std::__deque_buf_size(size_t)	16	static
-../Core/Src/game_2048.cpp:13:5:game_2048::game_2048(uint8_t, uint8_t)	16	static
-../Core/Src/game_2048.cpp:23:5:game_2048::~game_2048()	16	static
-../Core/Src/game_2048.cpp:29:10:bool game_2048::vacancy()	24	static
-../Core/Src/game_2048.cpp:39:10:bool game_2048::move(char)	88	static
+../Games/Game_2048.cpp:17:1:Game_2048::Game_2048(uint8_t, uint8_t)	16	static
+../Games/Game_2048.cpp:26:1:Game_2048::~Game_2048()	16	static
+../Games/Game_2048.cpp:32:6:bool Game_2048::vacancy()	24	static
+../Games/Game_2048.cpp:42:6:bool Game_2048::move(uint8_t, uint8_t**)	96	static
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_stack.h:99:11:std::stack<int>::~stack()	16	static
-../Core/Src/game_2048.cpp:149:9:int game_2048::shift_line(int*, int)	88	static
-../Core/Src/game_2048.cpp:208:10:bool game_2048::has_moves()	24	static
-../Core/Src/game_2048.cpp:232:10:void game_2048::populate(unsigned int)	40	static
-../Core/Src/game_2048.cpp:260:10:void game_2048::clear_grid()	24	static
-../Core/Src/game_2048.cpp:271:10:bool game_2048::play()	24	static
-../Core/Src/game_2048.cpp:308:5:int main_2048()	4	static
+../Games/Game_2048.cpp:136:5:int Game_2048::shift_line(int*, int)	88	static
+../Games/Game_2048.cpp:195:6:bool Game_2048::has_moves()	24	static
+../Games/Game_2048.cpp:219:6:void Game_2048::populate(uint32_t)	40	static
+../Games/Game_2048.cpp:247:6:void Game_2048::clear_grid()	24	static
+../Games/Game_2048.cpp:256:9:uint8_t Game_2048::get_colour(int)	40	static
+../Games/Game_2048.cpp:287:6:void Game_2048::update_grid(uint8_t*)	32	static
+../Games/Game_2048.cpp:326:5:int Game_2048::main_2048(uint8_t**, uint8_t*)	72	static
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_deque.h:855:7:std::deque<_Tp, _Alloc>::deque() [with _Tp = int; _Alloc = std::allocator<int>]	16	static
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_stack.h:162:2:std::stack<_Tp, _Sequence>::stack() [with _Seq = std::deque<int, std::allocator<int> >; _Requires = void; _Tp = int; _Sequence = std::deque<int, std::allocator<int> >]	16	static
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_deque.h:1027:7:std::deque<_Tp, _Alloc>::~deque() [with _Tp = int; _Alloc = std::allocator<int>]	48	static
@@ -18,6 +19,7 @@ C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_stack.h:232:7:std::stack<_Tp, _Sequence>::reference std::stack<_Tp, _Sequence>::top() [with _Tp = int; _Sequence = std::deque<int, std::allocator<int> >]	16	static
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_stack.h:260:7:void std::stack<_Tp, _Sequence>::push(const value_type&) [with _Tp = int; _Sequence = std::deque<int, std::allocator<int> >]	16	static
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_stack.h:293:7:void std::stack<_Tp, _Sequence>::pop() [with _Tp = int; _Sequence = std::deque<int, std::allocator<int> >]	16	static
+C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/cmath:1582:5:constexpr typename __gnu_cxx::__enable_if<std::__is_integer<_Tp>::__value, double>::__type std::log2(_Tp) [with _Tp = int]	16	static
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_deque.h:542:14:std::_Deque_base<int, std::allocator<int> >::_Deque_impl::~_Deque_impl()	16	static
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_deque.h:458:7:std::_Deque_base<_Tp, _Alloc>::_Deque_base() [with _Tp = int; _Alloc = std::allocator<int>]	16	static
 C:\ST\STM32CubeIDE_1.15.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.100.202403111256\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_deque.h:617:5:std::_Deque_base<_Tp, _Alloc>::~_Deque_base() [with _Tp = int; _Alloc = std::allocator<int>]	16	static

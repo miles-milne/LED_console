@@ -17,8 +17,8 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include <game_2048.h>
 #include "main.h"
+#include "../../Games/Game_2048.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -110,6 +110,38 @@ static void MX_I2C1_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+
+const uint16_t BUTTON_LIST[8] = {
+		  BUTTON_U1,
+		  BUTTON_R1,
+		  BUTTON_D1,
+		  BUTTON_L1,
+		  BUTTON_U2,
+		  BUTTON_R2,
+		  BUTTON_D2,
+		  BUTTON_L2
+};
+
+
+const uint8_t COLOURS[45] = {
+		  0, 0, 0, // null, 0
+		  2, 0, 0, // red, ID 1
+		  2, 2, 0, // yellow, ID 2
+		  0, 2, 0, // green, ID 3
+		  0, 2, 2, // cyan, ID 4
+		  0, 0, 2, // blue, ID 5
+		  2, 0, 2, // magenta, ID 6
+		  2, 2, 2, // white, ID 7
+		  2, 1, 0, // orange, ID 8
+		  1, 0, 2, // purple, ID 9
+		  1, 2, 0, // lime, ID 10
+		  0, 1, 2, // azure, ID 11
+		  0, 2, 1, // turqoise, ID 12
+		  2, 0, 1, // rose, ID 13
+		  3, 1, 2, // pink, ID 14
+};
+
+
 /* USER CODE END 0 */
 
 /**
@@ -146,7 +178,7 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_GPIO_WritePin(GPIOC, LED_R_DEBUG, HIGH);
+  HAL_GPIO_WritePin(GPIOC, LED_R_DEBUG, LOW);
   HAL_GPIO_WritePin(GPIOC, LED_B_DEBUG, LOW);
   HAL_GPIO_WritePin(GPIOC, LED_G_DEBUG, LOW);
 
@@ -159,16 +191,13 @@ int main(void)
   HAL_GPIO_WritePin(MUX_PORT, MUX_4, HIGH);
   HAL_GPIO_WritePin(MUX_PORT, MUX_5, HIGH);
 
-  uint32_t status_diff_millis = HAL_GetTick();
-  uint32_t led_diff_millis = HAL_GetTick();
+
 
 
   // colour ID system --> uint8_t, BBBBIIII
-  // [3:0] --> colour identifier -->
-  // [7:4] --> brightness: -->
-  // index = num & 0b11110000)*3;
-  // brightness = 16 * ((num>>4) + 1) - 1;
-  // buffer[i] = colours[index+i] * brightness)
+  // [3:0] --> colour identifier
+  // [7:4] --> brightness
+
 
   /*
 #define RED_1 0b00000001
@@ -196,66 +225,14 @@ int main(void)
 #define WHT_3 0b00100111
    */
 
-  uint8_t colours[45] = {
-		  0, 0, 0, // null, 0
-		  2, 0, 0, // red, ID 1
-		  2, 2, 0, // yellow, ID 2
-		  0, 2, 0, // green, ID 3
-		  0, 2, 2, // cyan, ID 4
-		  0, 0, 2, // blue, ID 5
-		  2, 0, 2, // magenta, ID 6
-		  2, 2, 2, // white, ID 7
-		  2, 1, 0, // orange, ID 8
-		  1, 0, 2, // purple, ID 9
-		  1, 2, 0, // lime, ID 10
-		  0, 1, 2, // azure, ID 11
-		  0, 2, 1, // turqoise, ID 12
-		  2, 0, 1, // rose, ID 13
-		  2, 1, 2, // pink, ID 14
-  };
 
 
-  uint8_t grid[25] =
-	  {0, 0, 0, 0, 0,
-	   0, 0, 0, 0, 0,
-	   0, 0, 0, 0, 0,
-	   0, 0, 0, 0, 0,
-	   0, 0, 0, 0, 0
-	};
 
 
-  /*
-  uint8_t grid[25] =
-    	  {RED_1, YEL_1, GRN_1, CYN_1, BLU_1,
-    	   0, 0, 0, 0, 0,
-  	   YEL_2, GRN_2, CYN_2, BLU_2, RED_2,
-  	   0, 0, 0, 0, 0,
-  	   GRN_3, CYN_3, BLU_3, RED_3, YEL_3
-    	  };
-
-*/
 
 
   // init variables that hold button data
 
-
-  uint8_t button_states = 0xFF, prev_button_states = 0xFF;
-
-  uint16_t button_list[8] = {
-		  BUTTON_U1,
-		  BUTTON_R1,
-		  BUTTON_D1,
-		  BUTTON_L1,
-		  BUTTON_U2,
-		  BUTTON_R2,
-		  BUTTON_D2,
-		  BUTTON_L2
-  };
-
-  uint32_t button_time_diffs[8];
-
-  for (int btn = 0; btn < 8; btn++)
-	  button_time_diffs[btn] = HAL_GetTick();
 
 
   //uint8_t rainbow_on[17] = {PWM0, 0xFF, 0, 0, 0xFF, 0xFF, 0, 0, 0xFF, 0, 0, 0xFF, 0xFF, 0, 0, 0xFF, 0};
@@ -265,26 +242,44 @@ int main(void)
   //uint8_t all_dim[17] = {PWM0, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16};
   //uint8_t rain1[17] = {PWM0, 32, 0, 0, 100, 30, 0, 20, 20, 0, 0, 32, 0, 0, 24, 12, 0};
 
+
+  // init buffers
+  uint8_t grid[25] =
+ 		  {0, 0, 0, 0, 0,
+ 		   0, 0, 0, 0, 0,
+ 		   0, 0, 0, 0, 0,
+ 		   0, 0, 0, 0, 0,
+ 		   0, 0, 0, 0, 0
+ 		  };
   uint8_t row1_buf[17], row2_buf[17], row3_buf[17], row4_buf[17], row5_buf[17];
   uint8_t* matrix[5] = {row1_buf, row2_buf, row3_buf, row4_buf, row5_buf};
-
   for (int r = 0; r < 5; r++)
-	  matrix[r][0] = PWM0;
+  	  matrix[r][0] = PWM0;
+  set_grid(matrix, grid, 8);
 
-  set_grid(matrix, grid, colours, 8);
 
   // LED driver initalization
   TLC_init();
 
 
 
+
+
+
+
+
+
+
   HAL_GPIO_WritePin(GPIOC, LED_B_DEBUG, HIGH);
   HAL_GPIO_WritePin(GPIOC, LED_G_DEBUG, HIGH);
 
-  uint8_t cursor_x = 0, cursor_y = 0, last_cursor = 0;
+  //set_pixel(matrix, 12, 0x01, 8);
+  uint8_t test = 0;
+  uint32_t test_time_diff = HAL_GetTick();
+  uint32_t status_diff_millis = HAL_GetTick();
 
 
-
+  Game_2048* test_2048 = new Game_2048(5, 5); // TODO test with other grids, like 4x4, 4x5, etc
 
 
   /* USER CODE END 2 */
@@ -297,50 +292,52 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-
+	  /*
 	  if (prev_button_states != button_states) {
 
 
 		  if ((button_states&0x01) == 0 && (prev_button_states&0x01) != 0) {
-			  solid_colour_grid(grid, 0x01);
+			  solid_colour_grid(grid, 0x06);
+			  set_grid(matrix, grid, 8);
 		  }
 		  else if ((button_states&0x02) == 0 && (prev_button_states&0x02) != 0)
 		  {
 			  solid_colour_grid(grid, 0x02);
+			  set_grid(matrix, grid, 8);
 		  }
 		  else if ((button_states&0x04) == 0 && (prev_button_states&0x04) != 0)
 		  {
-			  solid_colour_grid(grid, 0x03);
+			  solid_colour_grid(grid, 0x04);
+			  set_grid(matrix, grid, 8);
 		  }
 		  else if ((button_states&0x08) == 0 && (prev_button_states&0x08) != 0)
 		  {
-			  solid_colour_grid(grid, 0x04);
+			  solid_colour_grid(grid, 0x07);
+			  set_grid(matrix, grid, 8);
 		  }
 
 
 
 
-		  set_grid(matrix, grid, colours, 8);
+
 	  }
+	  */
 
 
+	  test_2048->main_2048(matrix, grid);
 
-
-
-
-
-	  prev_button_states = button_states;
-	  button_states = update_button_states(button_states, button_list, button_time_diffs);
-
-
-
-	  display(matrix);
-
-
-	if (HAL_GetTick() - status_diff_millis > 1000) {
-		status_diff_millis = HAL_GetTick();
-		LED_heartbeat();
+	  /*
+	if (HAL_GetTick() - test_time_diff > 50)
+	{
+	  	set_pixel(matrix, test, 0x01, 8);
+	  	test = (test+1)%25;
+	  	test_time_diff = HAL_GetTick();
 	}
+		*/
+
+
+
+
 
   }
 
@@ -565,8 +562,7 @@ void set_LEDs(uint8_t* row_buffer) {
 	HAL_I2C_Master_Transmit(&hi2c1, TLC_ADDRESS, row_buffer, 17, HAL_MAX_DELAY);
 }
 
-void set_grid(uint8_t** rows, uint8_t* grid, uint8_t* colours, uint8_t bright_modifier) {
-
+void set_grid(uint8_t** rows, uint8_t* grid, uint8_t bright_modifier) {
 
 	uint8_t grid_index = 0, r, c, i, brightness, colour_id;
 
@@ -576,25 +572,35 @@ void set_grid(uint8_t** rows, uint8_t* grid, uint8_t* colours, uint8_t bright_mo
 
 		for (c = 0; c < 5; c++) {
 
-			brightness = bright_modifier * ((grid[grid_index]>>4) + 1) - 1;
+			brightness =((grid[grid_index]>>4) + 1) * bright_modifier - 1;
 			colour_id = (grid[grid_index] & 0b00001111)*3;
 
 			for (i = 0; i < 3; i++) {
-				test = colours[colour_id+i] * brightness;
-				col = (c*3) + i + 1;
-
-				rows[r][col] = test;
+				rows[r][(c*3) + i + 1] = COLOURS[colour_id+i] * brightness;;
 			}
 
 			grid_index++;
 		}
 	}
+}
 
-	//display_on();
+void set_pixel(uint8_t** rows, uint8_t pixel, uint8_t colour, uint8_t bright_modifier) {
 
-  // index = num & 0b11110000)*3;
-  // brightness = 16 * ((num>>4) + 1) - 1;
-  // buffer[i] = colours[index+i] * brightness)
+
+	if (pixel >= 25)
+		return;
+
+	uint8_t r = pixel/5, c = pixel%5, brightness, colour_id;
+
+	brightness =((colour>>4) + 1) * bright_modifier - 1;
+	colour_id = (colour & 0b00001111)*3;
+
+	for (int i = 0; i < 3; i++) {
+		rows[r][(c*3) + i + 1] = COLOURS[colour_id+i] * brightness;;
+	}
+
+
+
 }
 
 void solid_colour_grid(uint8_t* grid, uint8_t colour) {
@@ -617,14 +623,14 @@ void display(uint8_t** rows) {
 	}
 }
 
-uint8_t update_button_states(uint8_t current_states, uint16_t* buttons, uint32_t* time_diff) {
+uint8_t update_button_states(uint8_t current_states, uint32_t* time_diff) {
 
 	uint8_t new_states = 0x00;
 	uint32_t* temp;
 
 	for (uint8_t btn = 0; btn < 8; btn++) {
 		temp = &time_diff[btn];
-		new_states |= ((query_button_change(temp, buttons[btn], (current_states>>btn)&0x01))<<btn);
+		new_states |= ((query_button_change(temp, BUTTON_LIST[btn], (current_states>>btn)&0x01))<<btn);
 	}
 
 
@@ -644,6 +650,11 @@ uint8_t query_button_change(uint32_t* last_pressed, uint16_t button, uint8_t cur
 
 	return 0;
 }
+
+void disable_mux5() {
+	HAL_GPIO_WritePin(MUX_PORT, MUX_5, HIGH);
+}
+
 
 
 /* USER CODE END 4 */
