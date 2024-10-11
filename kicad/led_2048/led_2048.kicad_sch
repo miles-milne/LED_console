@@ -5,9 +5,351 @@
 	(uuid "c576df4b-92c0-44b0-b003-b697a5a04765")
 	(paper "A4")
 	(lib_symbols)
+	(wire
+		(pts
+			(xy 118.11 125.73) (xy 137.16 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f90448d-216c-4b73-8bc9-bf478ef381cc")
+	)
+	(wire
+		(pts
+			(xy 200.66 109.22) (xy 166.37 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "232d2080-6a4d-46a9-8512-b98d0cc70da3")
+	)
+	(wire
+		(pts
+			(xy 88.9 116.84) (xy 118.11 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3eb5f5f0-7477-4fba-87b0-849874e7d769")
+	)
+	(wire
+		(pts
+			(xy 88.9 111.76) (xy 104.14 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "504026a4-6adc-467f-bc2d-4cad483eceb1")
+	)
+	(wire
+		(pts
+			(xy 88.9 101.6) (xy 127 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "59b1854d-bc17-4588-b11a-1e0783658e64")
+	)
+	(wire
+		(pts
+			(xy 146.05 125.73) (xy 166.37 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7074c86d-cee9-445f-84a9-87daaaae5e8a")
+	)
+	(wire
+		(pts
+			(xy 118.11 116.84) (xy 118.11 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "84bb38d2-5ad6-4d29-8a5b-453ac265242e")
+	)
+	(wire
+		(pts
+			(xy 180.34 102.87) (xy 200.66 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b52ebf5-a40e-40c5-89ba-8afa3cfcf742")
+	)
+	(wire
+		(pts
+			(xy 166.37 109.22) (xy 166.37 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9c82fb4a-3f65-43d0-b849-95dd70327e51")
+	)
+	(wire
+		(pts
+			(xy 88.9 106.68) (xy 104.14 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1ad2da6-033a-423a-bbac-705368b2dc9b")
+	)
+	(global_label "Buttons 9-10"
+		(shape input)
+		(at 88.9 111.76 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "32950330-121a-491b-b6a1-f496defe5a13")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 72.5498 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Power"
+		(shape input)
+		(at 200.66 109.22 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "3678be9e-13b1-49a7-8a9d-16a8e6e80982")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 209.2695 109.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Buttons 1-8"
+		(shape input)
+		(at 200.66 102.87 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "438058e0-1ad6-494c-bcd6-537d67e4bf58")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 215.8007 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "MUX"
+		(shape input)
+		(at 88.9 101.6 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4b5fb63e-5bcf-48b4-bf78-b69498e875bd")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 81.9234 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Power"
+		(shape input)
+		(at 88.9 116.84 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "54151f24-3efc-447d-8e9d-15153014c691")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 80.2905 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Power"
+		(shape bidirectional)
+		(at 137.16 125.73 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "879ad285-c954-4542-901a-c3e3d532192a")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 146.8808 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Buttons 1-8"
+		(shape input)
+		(at 180.34 102.87 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "95f29b43-aa6a-4b62-91ed-c8d0f29f5177")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 165.1993 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "MUX"
+		(shape input)
+		(at 127 101.6 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c2645746-8b93-4a85-947e-6eec796bd246")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 133.9766 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Shift Register"
+		(shape input)
+		(at 88.9 106.68 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "dd864b17-4721-4903-a093-c16aa99148a0")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 72.7915 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Shift Register"
+		(shape input)
+		(at 104.14 106.68 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e2727be3-16de-4b61-92a2-8ca110c7fe01")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 120.2485 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Buttons 9-10"
+		(shape input)
+		(at 104.14 111.76 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "fc3ac661-d745-439d-a1a3-35f8ccd0c609")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 120.4902 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(sheet
-		(at 180.34 43.18)
-		(size 60.96 24.13)
+		(at 200.66 93.98)
+		(size 27.94 24.13)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -17,8 +359,8 @@
 			(color 0 0 0 0.0000)
 		)
 		(uuid "ae8526da-3c23-4338-b8c9-a49831dbded9")
-		(property "Sheetname" "Press buttons"
-			(at 180.34 42.4684 0)
+		(property "Sheetname" "Push buttons"
+			(at 200.66 93.2684 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -27,7 +369,7 @@
 			)
 		)
 		(property "Sheetfile" "buttons.kicad_sch"
-			(at 180.34 67.8946 0)
+			(at 200.66 118.6946 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -44,8 +386,8 @@
 		)
 	)
 	(sheet
-		(at 75.946 37.338)
-		(size 27.686 17.526)
+		(at 55.88 97.028)
+		(size 33.02 24.892)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -56,7 +398,7 @@
 		)
 		(uuid "b7eda4aa-318d-4020-9d5c-8e21103c3223")
 		(property "Sheetname" "Score display"
-			(at 75.946 36.6264 0)
+			(at 55.88 96.3164 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -65,7 +407,7 @@
 			)
 		)
 		(property "Sheetfile" "seven_seg_display.kicad_sch"
-			(at 75.946 55.4486 0)
+			(at 55.88 122.5046 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -82,8 +424,8 @@
 		)
 	)
 	(sheet
-		(at 178.943 80.01)
-		(size 78.74 32.766)
+		(at 126.873 87.63)
+		(size 31.242 32.766)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -94,7 +436,7 @@
 		)
 		(uuid "c77ae034-cca4-473c-b646-c49363a57ea5")
 		(property "Sheetname" "LED Matrix"
-			(at 178.943 79.2984 0)
+			(at 126.873 86.9184 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -103,7 +445,7 @@
 			)
 		)
 		(property "Sheetfile" "display.kicad_sch"
-			(at 178.943 113.3606 0)
+			(at 126.873 120.9806 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -120,7 +462,7 @@
 		)
 	)
 	(sheet
-		(at 71.882 85.852)
+		(at 104.14 83.312)
 		(size 76.2 45.72)
 		(fields_autoplaced yes)
 		(stroke
@@ -132,7 +474,7 @@
 		)
 		(uuid "fbb28dfe-f4d8-4e18-86e7-4227759d21b0")
 		(property "Sheetname" "MCU"
-			(at 71.882 85.1404 0)
+			(at 104.14 82.6004 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -141,7 +483,7 @@
 			)
 		)
 		(property "Sheetfile" "mcu.kicad_sch"
-			(at 71.882 132.1566 0)
+			(at 104.14 129.6166 0)
 			(effects
 				(font
 					(size 1.27 1.27)
